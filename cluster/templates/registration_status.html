@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Status</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="bg-white p-8 rounded-lg shadow-lg max-w-lg w-full text-center space-y-6">
+        <h1 class="text-3xl font-bold text-blue-600">Your Registration Status</h1>
+
+        {% if registration %}
+            <div class="flex flex-col items-center space-y-4">
+                <!-- Status Message -->
+                {% if status == "Approved" %}
+                    <!-- Approved Status with Green Check Animation -->
+                    <div class="relative w-16 h-16 bg-green-200 rounded-full flex items-center justify-center">
+                        <div class="w-8 h-8 bg-green-500 rounded-full animate-ping absolute"></div>
+                        <svg class="w-8 h-8 text-green-600" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M20.285 6.709a1 1 0 00-1.414 0l-8.096 8.096-3.09-3.09a1 1 0 10-1.414 1.414l3.8 3.8a1 1 0 001.414 0l8.8-8.8a1 1 0 000-1.414z"/>
+                        </svg>
+                    </div>
+                    <p class="text-lg font-semibold text-green-600">Status: Approved</p>
+                    <a href="https://www.hackerrank.com/codecluster-1" class="text-blue-600 hover:underline">Click here</a>
+                {% elif status == "Pending" %}
+                    <!-- Pending Status with Yellow Warning Icon -->
+                    <div class="relative w-16 h-16 bg-yellow-200 rounded-full flex items-center justify-center">
+                        <div class="w-8 h-8 bg-yellow-500 rounded-full animate-pulse absolute"></div>
+                        <svg class="w-8 h-8 text-yellow-600" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2a10 10 0 1010 10A10 10 0 0012 2zm0 18a8 8 0 118-8 8 8 0 01-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/>
+                        </svg>
+                    </div>
+                    <p class="text-lg font-semibold text-yellow-600">Status: Pending</p>
+                {% else %}
+                    <!-- Default Status Message if Needed -->
+                    <p class="text-lg font-semibold text-gray-700">Status: Unknown</p>
+                {% endif %}
+            </div>
+        {% else %}
+            <div class="flex flex-col items-center space-y-4">
+                <!-- Not Registered Message -->
+                <p class="text-lg font-semibold text-gray-600">You have not registered yet.</p>
+                <svg class="w-16 h-16 text-gray-300" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2a10 10 0 1010 10A10 10 0 0012 2zm1 15h-2v-2h2zm0-4h-2V7h2z"/>
+                </svg>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>

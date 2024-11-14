@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contest Registration</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .animate-fadeIn {
+            animation: fadeIn 0.5s ease-out;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-blue-500 to-purple-600 min-h-screen flex items-center justify-center p-4">
+    <div class="bg-white bg-opacity-20 backdrop-filter backdrop-blur-lg rounded-xl shadow-xl p-8 w-full max-w-2xl transition-all duration-300 hover:shadow-2xl animate-fadeIn">
+        <h1 class="text-3xl font-bold mb-6 text-center text-white">Contest Registration</h1>
+
+        <form method="post" class="space-y-6">
+            {% csrf_token %}
+
+            <div class="space-y-4">
+                <!-- Name Field -->
+                <div class="relative">
+                    <label for="{{ form.name.id_for_label }}" class="block text-white font-semibold mb-2">{{ form.name.label }}</label>
+                    {{ form.name }}
+                    {% if form.name.errors %}
+                        <p class="text-red-500 text-sm mt-1">{{ form.name.errors }}</p>
+                    {% endif %}
+                </div>
+
+                <!-- Email Field -->
+                <div class="relative">
+                    <label for="{{ form.email.id_for_label }}" class="block text-white font-semibold mb-2">{{ form.email.label }}</label>
+                    {{ form.email }}
+                    {% if form.email.errors %}
+                        <p class="text-red-500 text-sm mt-1">{{ form.email.errors }}</p>
+                    {% endif %}
+                </div>
+
+                <!-- HackerRank ID Field -->
+                <div class="relative">
+                    <label for="{{ form.hackerrank_id.id_for_label }}" class="block text-white font-semibold mb-2">{{ form.hackerrank_id.label }}</label>
+                    {{ form.hackerrank_id }}
+                    {% if form.hackerrank_id.errors %}
+                        <p class="text-red-500 text-sm mt-1">{{ form.hackerrank_id.errors }}</p>
+                    {% endif %}
+                </div>
+
+                <!-- Phone Number Field -->
+                <div class="relative">
+                    <label for="{{ form.phone_number.id_for_label }}" class="block text-white font-semibold mb-2">{{ form.phone_number.label }}</label>
+                    {{ form.phone_number }}
+                    {% if form.phone_number.errors %}
+                        <p class="text-red-500 text-sm mt-1">{{ form.phone_number.errors }}</p>
+                    {% endif %}
+                </div>
+
+                <!-- College Name Field -->
+                <div class="relative">
+                    <label for="{{ form.college_name.id_for_label }}" class="block text-white font-semibold mb-2">{{ form.college_name.label }}</label>
+                    {{ form.college_name }}
+                    {% if form.college_name.errors %}
+                        <p class="text-red-500 text-sm mt-1">{{ form.college_name.errors }}</p>
+                    {% endif %}
+                </div>
+
+                <!-- QR Code Image Section -->
+                <div class="mb-4 flex justify-center">
+                    <label for="qr_code" class="block text-white font-semibold mb-2">Scan the QR Code for Payment</label>
+                    <img src="https://res.cloudinary.com/dxkwt2ssi/image/upload/v1731610760/WhatsApp_Image_2024-11-15_at_00.26.48_a5f8c909-removebg-preview_f2gpgl.png" alt="Payment QR Code" class="w-32 h-32 rounded-lg shadow-md transition-all duration-300 hover:scale-105">
+                </div>
+
+                <!-- Transaction ID Field -->
+                <div class="relative">
+                    <label for="{{ form.transaction_id.id_for_label }}" class="block text-white font-semibold mb-2">{{ form.transaction_id.label }}</label>
+                    {{ form.transaction_id }}
+                    {% if form.transaction_id.errors %}
+                        <p class="text-red-500 text-sm mt-1">{{ form.transaction_id.errors }}</p>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="w-full py-2 px-4 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50">
+                Register
+            </button>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.querySelector('form');
+            const inputs = form.querySelectorAll('input');
+
+            inputs.forEach(input => {
+                input.classList.add('w-full', 'pl-3', 'pr-3', 'py-2', 'rounded-lg', 'bg-white', 'bg-opacity-20', 'text-white', 'placeholder-gray-300', 'focus:outline-none', 'focus:ring-2', 'focus:ring-blue-400');
+                input.addEventListener('focus', function() {
+                    this.parentElement.classList.add('animate-fadeIn');
+                });
+                input.addEventListener('blur', function() {
+                    this.parentElement.classList.remove('animate-fadeIn');
+                });
+            });
+        });
+    </script>
+</body>
+</html>

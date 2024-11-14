@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #2b5b84, #1a365d);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+            width: 90%;
+            max-width: 500px;
+            transform: translateY(20px);
+            opacity: 0;
+            animation: slideUp 0.5s ease forwards;
+        }
+
+        @keyframes slideUp {
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        h2 {
+            color: #1a365d;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+            position: relative;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 3px;
+            background: #ffd700;
+            border-radius: 2px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .form-group {
+            position: relative;
+            margin-bottom: 1rem;
+        }
+
+        .form-group p {
+            margin: 0;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #1a365d;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .form-group input:focus {
+            border-color: #2b5b84;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(43, 91, 132, 0.1);
+        }
+
+        .help-text {
+            font-size: 0.8rem;
+            color: #666;
+            margin-top: 0.25rem;
+        }
+
+        .btn-primary {
+            background: #ffd700;
+            color: #1a365d;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-primary:hover {
+            background: #e6c200;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3);
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: 1.5rem;
+            color: #333;
+            padding-top: 1rem;
+            border-top: 1px solid #eee;
+        }
+
+        .login-link a {
+            color: #2b5b84;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .login-link a:hover {
+            color: #1a365d;
+            text-decoration: underline;
+        }
+
+        /* Error message styling */
+        .errorlist {
+            list-style: none;
+            color: #dc3545;
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+            padding: 0;
+        }
+
+        /* Password strength indicator */
+        .password-strength {
+            height: 4px;
+            background: #eee;
+            margin-top: 0.5rem;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .password-strength-bar {
+            height: 100%;
+            width: 0;
+            transition: all 0.3s ease;
+            background: #dc3545;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 480px) {
+            .container {
+                padding: 1.5rem;
+                width: 95%;
+            }
+
+            h2 {
+                font-size: 1.75rem;
+            }
+
+            .btn-primary {
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <a href="{% url 'home' %}">
+            <img src="https://res.cloudinary.com/dxkwt2ssi/image/upload/v1731615755/icons8-back-arrow-48_iaj3ya.png" alt="">
+        </a>
+        <h2>Create Account</h2>
+        <form method="post" action="{% url 'signup' %}" id="signupForm">
+            {% csrf_token %}
+            {% for field in form %}
+            <div class="form-group">
+                {{ field.label_tag }}
+                {{ field }}
+                {% if field.errors %}
+                <ul class="errorlist">
+                    {% for error in field.errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                {% if field.name == 'password1' %}
+                <div class="password-strength">
+                    <div class="password-strength-bar"></div>
+                </div>
+                {% endif %}
+            </div>
+            {% endfor %}
+            <button type="submit" class="btn-primary">Create Account</button>
+        </form>
+        <p class="login-link">Already have an account? <a href="{% url 'login' %}">Login</a></p>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add loading animation on form submit
+            const form = document.getElementById('signupForm');
+            const button = form.querySelector('button[type="submit"]');
+            
+            form.addEventListener('submit', function() {
+                button.style.opacity = '0.7';
+                button.innerHTML = 'Creating Account...';
+                button.style.cursor = 'wait';
+            });
+
+            // Add subtle hover effect to input fields
+            const inputs = document.querySelectorAll('input');
+            inputs.forEach(input => {
+                input.addEventListener('focus', function() {
+                    this.parentElement.style.transform = 'translateY(-2px)';
+                });
+                
+                input.addEventListener('blur', function() {
+                    this.parentElement.style.transform = 'translateY(0)';
+                });
+            });
+
+            // Password strength indicator
+            const passwordInput = document.querySelector('input[name="password1"]');
+            if (passwordInput) {
+                const strengthBar = document.querySelector('.password-strength-bar');
+                
+                passwordInput.addEventListener('input', function() {
+                    const strength = calculatePasswordStrength(this.value);
+                    updateStrengthBar(strength);
+                });
+
+                function calculatePasswordStrength(password) {
+                    let strength = 0;
+                    if (password.length >= 8) strength += 25;
+                    if (password.match(/[A-Z]/)) strength += 25;
+                    if (password.match(/[0-9]/)) strength += 25;
+                    if (password.match(/[^A-Za-z0-9]/)) strength += 25;
+                    return strength;
+                }
+
+                function updateStrengthBar(strength) {
+                    strengthBar.style.width = strength + '%';
+                    if (strength <= 25) {
+                        strengthBar.style.background = '#dc3545';
+                    } else if (strength <= 50) {
+                        strengthBar.style.background = '#ffc107';
+                    } else if (strength <= 75) {
+                        strengthBar.style.background = '#4BB543';
+                    } else {
+                        strengthBar.style.background = '#28a745';
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
