@@ -6,11 +6,17 @@ from django.contrib import messages
 from .models import *
 from .forms import *
 
+
+
 # Create your views here.
 def home(request):
     contest = Contest.objects.all()
-    context = {'contest': contest}
-    return render(request, 'index.html', context)
+    if request.user.is_authenticated:
+        register = Registration.objects.filter(user=request.user).first()
+    else:
+        register = None  # No registration if the user is not authenticated
+
+    return render(request, 'index.html', {'register': register, 'contest':contest}, )
 
 # Signin view for login functionality
 def signin(request):
@@ -72,3 +78,10 @@ def registration_status(request):
         status = "Not Registered"
     
     return render(request, 'registration_status.html', {'registration': registration, 'status': status})
+
+
+
+from django.shortcuts import render
+
+def about(request):
+    return render(request, 'about.html')
