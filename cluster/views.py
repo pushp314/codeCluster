@@ -80,8 +80,3 @@ def registration_status(request):
     return render(request, 'registration_status.html', {'registration': registration, 'status': status})
 
 
-
-from django.shortcuts import render
-
-def about(request):
-    return render(request, 'about.html')
