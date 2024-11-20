@@ -32,18 +32,22 @@ def signin(request):
     return render(request, 'signin.html', {'form': form})
 
 
-# Signup view for registration functionality
+from django.shortcuts import render, redirect
+from django.contrib.auth import login as auth_login
+from .forms import CustomUserCreationForm
+
 def signup(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = CustomUserCreationForm(request.POST)
         if form.is_valid():
-            user = form.save()  # Save the new user
-            auth_login(request, user)  # Log the user in automatically after signup
-            return redirect('home')  # Redirect to the home page after successful signup
+            user = form.save()  # Save the new user with email
+            auth_login(request, user)  # Log in the user automatically
+            return redirect('home')  # Redirect to home page
     else:
-        form = UserCreationForm()
+        form = CustomUserCreationForm()
 
     return render(request, 'signup.html', {'form': form})
+
 
 @login_required
 def register(request):
@@ -78,5 +82,42 @@ def registration_status(request):
         status = "Not Registered"
     
     return render(request, 'registration_status.html', {'registration': registration, 'status': status})
+
+
+
+@login_required
+def profile(request):
+    try:
+        registration = Registration.objects.get(user=request.user)
+    except Registration.DoesNotExist:
+        registration = None
+
+    return render(request, 'dashboard/profile.html', {'registration': registration})
+
+
+def about(request):
+    return render(request, 'pages/about.html')
+
+def terms(request):
+    return render(request, 'pages/terms.html')
+
+def privacy(request):
+    return render(request, 'pages/privacy.html')
+
+from django.shortcuts import render, redirect
+from .models import ContactMessage
+
+def contact(request):
+    if request.method == "POST":
+        name = request.POST.get("name")
+        email = request.POST.get("email")
+        message = request.POST.get("message")
+
+        # Save the form data to the database
+        ContactMessage.objects.create(name=name, email=email, message=message)
+
+        return redirect('contact')  # Redirect to the same page after form submission
+
+    return render(request, "pages/contactus.html")  # Render your form template
 
 

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | CodeCluster</title>
+    
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2ecc71;
+            --text-color: #333;
+            --background-color: #f4f7f9;
+            --card-background: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .about-container {
+            max-width: 90vw;
+            margin: 0 auto;
+            padding: 40px 20px;
+            background-color: var(--card-background);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            animation: fadeIn 0.7s ease-out;
+        }
+
+        .about-header {
+            text-align: center;
+            margin-bottom: 30px;
+            color: var(--primary-color);
+        }
+
+        .about-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .about-header h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background-color: var(--primary-color);
+        }
+
+        .about-section {
+            margin-bottom: 25px;
+        }
+
+        .about-section h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            border-left: 4px solid var(--primary-color);
+            padding-left: 10px;
+        }
+
+        .why-choose-list {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+
+        .why-choose-list ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .why-choose-list li {
+            padding: 10px;
+            margin-bottom: 10px;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            transition: transform 0.3s ease;
+        }
+
+        .why-choose-list li:hover {
+            transform: translateX(10px);
+        }
+
+        .why-choose-list li i {
+            margin-right: 15px;
+            color: var(--primary-color);
+            font-size: 1.2rem;
+        }
+
+        .join-section {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .about-container {
+                padding: 20px 15px;
+            }
+
+            .about-header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="about-container">
+            <div class="about-header">
+                <h1>About CodeCluster</h1>
+            </div>
+            
+            <div class="about-section">
+                <p>Welcome to CodeCluster, a dynamic platform designed for programmers, developers, and tech enthusiasts. Our mission is to create an environment that encourages coding practice, collaboration, and learning.</p>
+            </div>
+            
+            <div class="about-section">
+                <h3>Our Mission</h3>
+                <p>At CodeCluster, our goal is to help developers of all skill levels enhance their coding abilities through practical challenges, contests, and collaboration. We aim to make learning to code an enjoyable and rewarding experience, fostering growth in the tech community.</p>
+            </div>
+
+            <div class="about-section">
+                <h3>What We Do</h3>
+                <p>We provide a variety of coding contests, challenges, and projects that range from beginner to expert level. These activities are designed to test and improve coding skills, promote problem-solving, and create a platform for developers to showcase their talent.</p>
+            </div>
+
+            <div class="about-section why-choose-list">
+                <h3>Why Choose CodeCluster?</h3>
+                <ul>
+                    <li><i class="fas fa-code"></i>Wide range of coding challenges and contests</li>
+                    <li><i class="fas fa-users"></i>Collaborative environment to learn and grow</li>
+                    <li><i class="fas fa-globe"></i>Opportunity to showcase your coding skills to a global community</li>
+                    <li><i class="fas fa-chart-line"></i>Personalized feedback and code optimization suggestions</li>
+                </ul>
+            </div>
+
+            <div class="join-section">
+                <h3>Join Us Today</h3>
+                <p>Whether you are a beginner or an experienced developer, CodeCluster is the perfect place to grow your coding skills. Join us today and become a part of our vibrant community of developers!</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const listItems = document.querySelectorAll('.why-choose-list li');
+            
+            listItems.forEach(item => {
+                item.addEventListener('mouseenter', () => {
+                    item.style.backgroundColor = '#f0f0f0';
+                });
+                
+                item.addEventListener('mouseleave', () => {
+                    item.style.backgroundColor = 'white';
+                });
+            });
+        });
+    </script>
+</body>
+</html>

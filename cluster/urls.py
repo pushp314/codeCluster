@@ -10,4 +10,9 @@ urlpatterns = [
     path('register/', register, name='register'),
     path('registration_success/', registration_success, name='registration_success'),
     path('registration_status/', registration_status, name='status'),
+    path('profile/', profile, name='profile'),
+    path('about/', about, name="about"),
+    path('privacy policy/', privacy, name="privacy"),
+    path('terms & condition/', terms, name="terms"),
+    path('contact/', contact, name="contact"),
 ]

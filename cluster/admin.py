@@ -14,3 +14,9 @@ class RegistrationAdmin(admin.ModelAdmin):
 
 admin.site.register(Registration, RegistrationAdmin)
 admin.site.register(Contest)
+
+@admin.register(ContactMessage)
+class ContactMessageAdmin(admin.ModelAdmin):
+    list_display = ('name', 'email', 'submitted_at')
+    search_fields = ('name', 'email')
+    list_filter = ('submitted_at',)

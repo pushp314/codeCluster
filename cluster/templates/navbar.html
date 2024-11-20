@@ -4,10 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Navbar</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
 </head>
 <body>
      <!-- Header -->
-<header class="fixed w-full bg-gray-800 bg-opacity-90 transition duration-300 z-50 shadow-md">
+<header class="fixed w-full bg-gray-900 bg-opacity-90 transition duration-300 z-50 shadow-md">
     <nav class="container mx-auto flex justify-between items-center py-4 px-5">
         <!-- Logo and Branding -->
         <a href="{% url 'home' %}" class="text-xl font-bold text-blue-500 flex items-center space-x-2 hover:text-blue-300">
@@ -51,5 +53,15 @@
         </ul>
     </div>
 </header>
+
+<!-- JS for mobile menu toggle -->
+<script>
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    
+    menuToggle.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+    });
+</script>
 </body>
 </html>
